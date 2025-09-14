@@ -12,11 +12,11 @@ add_executable(wordlistcpp ${SRC_FILES})
 
 include(FetchContent)
 FetchContent_Declare(
-        simdjson
-        GIT_REPOSITORY https://github.com/simdjson/simdjson.git
+        json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
         GIT_SHALLOW TRUE
 )
-FetchContent_MakeAvailable(simdjson)
+FetchContent_MakeAvailable(json)
 
 FetchContent_Declare(
         cxxopts
@@ -26,4 +26,4 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(cxxopts)
 
 target_link_libraries(wordlistcpp PRIVATE cxxopts::cxxopts)
-target_link_libraries(wordlistcpp PRIVATE simdjson)
+target_link_libraries(wordlistcpp PRIVATE nlohmann_json::nlohmann_json)
