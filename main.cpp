@@ -9,16 +9,16 @@
 
 int main(int argc, const char **argv) {
 
-    std::shared_ptr<cxxopts::Options> options = std::make_shared<cxxopts::Options>("wordlistcpp", "A C++ implementation of wordlistctl");
+   cxxopts::Options options = cxxopts::Options("wordlistcpp", "A C++ implementation of wordlistctl");
 
     // setup positional arguments
-    options->add_options()
+    options.add_options()
         ("command", "Which command to execute (i.e. fetch, search...)", cxxopts::value<std::string>());
 
     setup_fetch(options);
 
-    options->parse_positional({"command"});
-    auto result = options->parse(argc, argv);
+    options.parse_positional({"command"});
+    auto result = options.parse(argc, argv);
 
     return 0;
 }

@@ -13,7 +13,7 @@ typedef struct {
     std::string                 output;
 } FetchOptions;
 
-void setup_fetch(std::shared_ptr<cxxopts::Options> options);
-void parse_fetch(cxxopts::Options &options);
+void setup_fetch(cxxopts::Options& options);
+void parse_fetch();
 
 #endif //WORDLISTCPP_FETCH_HPP
