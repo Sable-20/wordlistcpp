@@ -3,11 +3,15 @@ project(wordlistcpp)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(wordlistcpp main.cpp
-        subcommands/fetch/FETCH.hpp
-        subcommands/fetch/FETCH.cpp)
+set(SRC_FILES
+    subcommands/fetch/fetch.cpp)
+
+set(HEADER_FILES
+    subcommands/fetch/fetch.hpp)
+
+add_executable(wordlistcpp main.cpp ${SRC_FILES} ${HEADER_FILES})
 
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/lib/cli11)
-target_link_libraries(wordlistcpp PRIVATE CLI11::CLI11)
+add_subdirectory(${CMAKE_SOURCE_DIR}/lib/cxxopts)
+target_link_libraries(wordlistcpp PRIVATE cxxopts::cxxopts)
