@@ -4,12 +4,13 @@ project(wordlistcpp)
 set(CMAKE_CXX_STANDARD 20)
 
 set(SRC_FILES
-    subcommands/fetch/fetch.cpp)
+        main.cpp
+        subcommands/fetch/fetch.cpp)
 
 set(HEADER_FILES
-    subcommands/fetch/fetch.hpp)
+        subcommands/fetch/fetch.hpp)
 
-add_executable(wordlistcpp main.cpp ${SRC_FILES} ${HEADER_FILES})
+add_executable(wordlistcpp ${SRC_FILES} ${HEADER_FILES})
 
 include_directories(${CMAKE_SOURCE_DIR}/lib)
 
