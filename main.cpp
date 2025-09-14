@@ -26,17 +26,16 @@ int main(int argc, const char **argv) {
         .set_tab_expansion()
         .add_options()
             ("h,help", "Help find usage instructions on this program")
-            ("v,version", "Print the version information");
-
-    // setup positional arguments
-    options.add_options()
-        ("command", "Which command to execute (i.e. fetch, search...)", cxxopts::value<std::string>());
+            ("v,version", "Print the version information")
+            ("command", "The command to use", cxxopts::value<std::string>());
 
     options.add_options("Fetch")
         ("l,list", "The wordlist to fetch", cxxopts::value<std::string>())
         ("g,group", "group of wordlists to fetch", cxxopts::value<std::string>())
         ("d,decompress", "Whether or not to decompress any compressed files", cxxopts::value<bool>())
-        ("w,workers", "Download workers", cxxopts::value<int>()->default_value("10"));
+        ("w,workers", "Download workers", cxxopts::value<int>()->default_value("10"))
+        ("u,useragent", "Useragent to use during fetch", cxxopts::value<std::string>()->default_value("wordlistcpp/v0.1.x"))
+        ("b,basedir", "wordlist base directory", cxxopts::value<std::string>()->default_value("/usr/share/wordlists"));
 
 
     options.parse_positional({"command"});
