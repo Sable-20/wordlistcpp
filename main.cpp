@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <cxxopts.hpp>
+
 #include "subcommands/fetch/fetch.hpp"
 
 #define VERSION "0.1.0"
@@ -7,6 +9,16 @@
 
 int main(int argc, const char **argv) {
 
+    std::shared_ptr<cxxopts::Options> options = std::make_shared<cxxopts::Options>("wordlistcpp", "A C++ implementation of wordlistctl");
+
+    // setup positional arguments
+    options->add_options()
+        ("command", "Which command to execute (i.e. fetch, search...)", cxxopts::value<std::string>());
+
+    setup_fetch(options);
+
+    options->parse_positional({"command"});
+    auto result = options->parse(argc, argv);
+
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }
