@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(SRC_FILES
         src/main.cpp
         src/terminal_mods.hpp
+        src/subcommands/fetch.hpp
+        src/subcommands/fetch.cpp
 )
 
 add_executable(wordlistcpp ${SRC_FILES})
