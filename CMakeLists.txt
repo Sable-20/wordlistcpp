@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.6)
 project(wordlistcpp)
 
 set(CMAKE_CXX_STANDARD 20)
 
 set(SRC_FILES
-        main.cpp
-        terminal_mods.hpp
+        src/main.cpp
+        src/terminal_mods.hpp
 )
 
 add_executable(wordlistcpp ${SRC_FILES})
@@ -19,11 +19,13 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(json)
 
 FetchContent_Declare(
-        cxxopts
-        GIT_REPOSITORY https://github.com/jarro2783/cxxopts.git
+        cli11_proj
+        GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
         GIT_SHALLOW TRUE
+        GIT_TAG v2.5.0
 )
-FetchContent_MakeAvailable(cxxopts)
 
-target_link_libraries(wordlistcpp PRIVATE cxxopts::cxxopts)
+FetchContent_MakeAvailable(cli11_proj)
+
+target_link_libraries(wordlistcpp PRIVATE CLI11::CLI11)
 target_link_libraries(wordlistcpp PRIVATE nlohmann_json::nlohmann_json)
