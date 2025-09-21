@@ -8,6 +8,10 @@ set(SRC_FILES
         src/terminal_mods.hpp
         src/subcommands/fetch.hpp
         src/subcommands/fetch.cpp
+        src/subcommands/search_command.cpp
+        src/subcommands/search_command.hpp
+        src/json_reader.cpp
+        src/json_reader.hpp
 )
 
 add_compile_definitions("DEBUG=$<CONFIG:Debug>")

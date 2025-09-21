@@ -3,8 +3,8 @@
 //
 #include "fetch.hpp"
 
-void setupFetch(CLI::App& app) {
-    std::shared_ptr<FetchOptions> options = std::make_shared<FetchOptions>();
+FetchCommand::FetchCommand(CLI::App& app) {
+    std::shared_ptr<FetchCommand::FetchOptions> options = std::make_shared<FetchCommand::FetchOptions>();
     CLI::App* sub = app.add_subcommand("fetch", "Which lists to fetch");
 
     sub->add_option("-l,--list",options->wordlist, "Wordlist to fetch")->required();
@@ -16,12 +16,12 @@ void setupFetch(CLI::App& app) {
     sub->add_option("-b,--base-dir",options->baseDirectory,"Base directory for wordlists")
         ->default_val("/usr/share/wordlists");
 
-    sub->callback([options]() {
-        runFetch(*options);
+    sub->callback([options, this]() {
+        this->runFetch(*options);
     });
 }
 
-void runFetch(FetchOptions const& options) {
+void FetchCommand::runFetch(FetchOptions const& options) {
     if (options.wordlist.empty()) {
         std::cerr << "You must specify a wordlist to fetch" << std::endl;
         std::exit(1);
