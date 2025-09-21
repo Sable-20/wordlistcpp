@@ -10,6 +10,7 @@ set(SRC_FILES
         src/subcommands/fetch.cpp
 )
 
+add_compile_definitions("DEBUG=$<CONFIG:Debug>")
 add_executable(wordlistcpp ${SRC_FILES})
 
 include(FetchContent)

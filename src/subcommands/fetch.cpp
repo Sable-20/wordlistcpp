@@ -22,5 +22,15 @@ void setupFetch(CLI::App& app) {
 }
 
 void runFetch(FetchOptions const& options) {
-    throw std::logic_error("Function not yet implemented");
+    if (options.wordlist.empty()) {
+        std::cerr << "You must specify a wordlist to fetch" << std::endl;
+        std::exit(1);
+    }
+        // TODO: start parsing the arguments for after fetching
+        // TODO: parse json
+        // TODO: implement fuzzy search
+#if(DEBUG)
+        // TODO: parse json locally
+#endif
+        throw std::logic_error("Not implemented yet");
 }
