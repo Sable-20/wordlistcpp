@@ -19,10 +19,9 @@ private:
         std::string                 baseDirectory;
     };
 
-    void runFetch(FetchOptions const& options);
+    static void runFetch(FetchOptions const& options);
 public:
-
-    FetchCommand(CLI::App& app);
+    explicit FetchCommand(CLI::App& app);
 };
 
 #endif //WORDLISTCPP_FETCH_HPP

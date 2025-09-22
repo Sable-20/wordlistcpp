@@ -16,9 +16,9 @@ private:
         std::vector<std::string>    index;
     };
 
-    void runSearch(const SearchOptions& options);
+    static void runSearch(const SearchOptions& options);
 public:
-    SearchCommand(CLI::App& app);
+    explicit SearchCommand(CLI::App& app);
 };
 
 

@@ -4,5 +4,7 @@
 
 #include "json_reader.hpp"
 
-namespace wordlistcpp {
-} // wordlistcpp
+JsonReader::JsonReader(std::string const &json_name, std::string const &json_path) {
+    std::ifstream file(json_path + "/" + json_name);
+    _json = nlohmann::json::parse(file);
+}

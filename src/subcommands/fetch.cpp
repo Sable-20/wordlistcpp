@@ -16,8 +16,8 @@ FetchCommand::FetchCommand(CLI::App& app) {
     sub->add_option("-b,--base-dir",options->baseDirectory,"Base directory for wordlists")
         ->default_val("/usr/share/wordlists");
 
-    sub->callback([options, this]() {
-        this->runFetch(*options);
+    sub->callback([options]() {
+        FetchCommand::runFetch(*options);
     });
 }
 
