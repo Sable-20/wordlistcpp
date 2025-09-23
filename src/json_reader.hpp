@@ -15,8 +15,8 @@ private:
 
 public:
     // no discard?
-    [[nodiscard]] const nlohmann::json &getJson() const {
-        return _json;
+    [[nodiscard]] std::pair<std::string, nlohmann::json> getJson(std::string const &key) const {
+        return std::pair<std::string, nlohmann::json>{key, _json.at(key)};
     }
 
     explicit JsonReader(std::string const &json_path);

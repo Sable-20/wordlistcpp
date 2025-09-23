@@ -3,6 +3,8 @@
 //
 #include "fetch.hpp"
 #include "../json_reader.hpp"
+#include "../terminal_mods.hpp"
+#include <nlohmann/json.hpp>
 
 FetchCommand::FetchCommand(CLI::App &app) {
     std::shared_ptr<FetchCommand::FetchOptions> options = std::make_shared<FetchCommand::FetchOptions>();
@@ -33,9 +35,19 @@ void FetchCommand::runFetch(FetchOptions const &options) {
     if (!options.wordlist.empty()) {
 #if(DEBUG)
         // TODO: parse json locally
-        JsonReader reader = JsonReader(".");
+        JsonReader debug_reader = JsonReader(".");
+        std::pair<std::string, nlohmann::json> debug_result = debug_reader.getJson(options.wordlist[0]);
+        std::cout << RED << debug_result.first << " : " << RESET << debug_result.second << std::endl;
+
 #endif
+#if(RELEASE)
+        JsonReader reader = JsonReader(options.baseDirectory);
+#endif
+        if (options.decompress) {
+            std::cout << GREEN << BOLD << "DECOMPRESS ENABLED" << RESET << std::endl;
+        }
     }
 
-    throw std::logic_error("Not implemented yet");
+    std::cout << RED << UNDERLINE << "NOT YET IMPLEMENTED" << RESET << std::endl;
+    std::exit(0);
 }

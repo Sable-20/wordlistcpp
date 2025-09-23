@@ -4,32 +4,33 @@ project(wordlistcpp)
 set(CMAKE_CXX_STANDARD 20)
 
 set(SRC_FILES
-        src/main.cpp
-        src/terminal_mods.hpp
-        src/subcommands/fetch.hpp
-        src/subcommands/fetch.cpp
-        src/subcommands/search_command.cpp
-        src/subcommands/search_command.hpp
-        src/json_reader.cpp
-        src/json_reader.hpp
+		src/main.cpp
+		src/terminal_mods.hpp
+		src/subcommands/fetch.hpp
+		src/subcommands/fetch.cpp
+		src/subcommands/search_command.cpp
+		src/subcommands/search_command.hpp
+		src/json_reader.cpp
+		src/json_reader.hpp
 )
 
 add_compile_definitions("DEBUG=$<CONFIG:Debug>")
+add_compile_definitions("RELEASE=$<CONFIG:Release>")
 add_executable(wordlistcpp ${SRC_FILES})
 
 include(FetchContent)
 FetchContent_Declare(
-        json
-        GIT_REPOSITORY https://github.com/nlohmann/json.git
-        GIT_SHALLOW TRUE
+		json
+		GIT_REPOSITORY https://github.com/nlohmann/json.git
+		GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(json)
 
 FetchContent_Declare(
-        cli11_proj
-        GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-        GIT_SHALLOW TRUE
-        GIT_TAG v2.5.0
+		cli11_proj
+		GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+		GIT_SHALLOW TRUE
+		GIT_TAG v2.5.0
 )
 
 FetchContent_MakeAvailable(cli11_proj)
