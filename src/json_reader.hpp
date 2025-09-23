@@ -19,6 +19,6 @@ public:
         return _json;
     }
 
-    JsonReader(std::string const &json_name, std::string const &json_path);
+    explicit JsonReader(std::string const &json_path);
 };
 #endif //WORDLISTCPP_JSON_READER_HPP
