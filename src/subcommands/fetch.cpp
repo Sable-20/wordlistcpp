@@ -1,10 +1,18 @@
 //
 // Created by Sable Ayala on 9/18/25.
 //
+#include <nlohmann/json.hpp>
 #include "fetch.hpp"
 #include "../json_reader.hpp"
 #include "../terminal_mods.hpp"
-#include <nlohmann/json.hpp>
+/*
+ * FORMAT OF REPOSITORY
+ * {"bitquark-subdomains-top100000":
+ *  {"url":"https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/bitquark-subdomains-top100000.txt",
+ *  "size":"1.43 Mb",
+ *  "group":"discovery"
+ *  }...}
+ */
 
 FetchCommand::FetchCommand(CLI::App &app) {
     std::shared_ptr<FetchCommand::FetchOptions> options = std::make_shared<FetchCommand::FetchOptions>();
