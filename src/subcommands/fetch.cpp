@@ -45,7 +45,7 @@ void FetchCommand::runFetch(FetchOptions const &options) {
         // TODO: parse json locally
         JsonReader debug_reader = JsonReader(".");
         std::pair<std::string, nlohmann::json> debug_result = debug_reader.getJson(options.wordlist[0]);
-        std::cout << RED << debug_result.first << " : " << RESET << debug_result.second << std::endl;
+        std::cout << RED << debug_result.first << " : " << RESET << debug_result.second["url"] << std::endl;
 
 #endif
 #if(RELEASE)

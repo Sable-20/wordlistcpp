@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.6)
 project(wordlistcpp)
 
+# important options
+# -DOPENSSL_ROOT_DIR="$(brew --prefix openssl@3)"
+
 set(CMAKE_CXX_STANDARD 20)
 
 set(SRC_FILES
@@ -35,5 +38,17 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(cli11_proj)
 
+find_package(OpenSSL REQUIRED)
+
+set(HTTPLIB_USE_OPENSSL ON)
+FetchContent_Declare(
+		cpp-httplib
+		GIT_REPOSITORY https://github.com/yhirose/cpp-httplib.git
+		GIT_SHALLOW TRUE
+)
+
+FetchContent_MakeAvailable(cpp-httplib)
+
 target_link_libraries(wordlistcpp PRIVATE CLI11::CLI11)
 target_link_libraries(wordlistcpp PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(wordlistcpp PRIVATE httplib OpenSSL::SSL OpenSSL::Crypto)
