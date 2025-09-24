@@ -15,6 +15,8 @@ set(SRC_FILES
 		src/subcommands/search_command.hpp
 		src/json_reader.cpp
 		src/json_reader.hpp
+		src/http_client.cpp
+		src/http_client.hpp
 )
 
 add_compile_definitions("DEBUG=$<CONFIG:Debug>")
@@ -52,3 +54,12 @@ FetchContent_MakeAvailable(cpp-httplib)
 target_link_libraries(wordlistcpp PRIVATE CLI11::CLI11)
 target_link_libraries(wordlistcpp PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(wordlistcpp PRIVATE httplib OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(wordlistcpp
+		PRIVATE
+		"-framework CoreFoundation"
+		"-framework CFNetwork"
+		"-framework Security"
+		/opt/homebrew/opt/openssl@3/lib/libssl.dylib
+		/opt/homebrew/opt/openssl@3/lib/libcrypto.dylib
+		# ... other libs
+)

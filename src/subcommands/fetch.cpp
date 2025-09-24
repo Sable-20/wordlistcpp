@@ -5,6 +5,8 @@
 #include "fetch.hpp"
 #include "../json_reader.hpp"
 #include "../terminal_mods.hpp"
+#include "../http_client.hpp"
+
 /*
  * FORMAT OF REPOSITORY
  * {"bitquark-subdomains-top100000":
@@ -40,21 +42,28 @@ void FetchCommand::runFetch(FetchOptions const &options) {
     // TODO: start parsing the arguments for after fetching
     // TODO: parse json
     // TODO: implement fuzzy search
-    if (!options.wordlist.empty()) {
+    if (options.wordlist.empty()) {
+        std::cout << RED << "YOU MUST PROVIDE A WORDLIST" << RESET << std::endl;
+    }
 #if(DEBUG)
-        // TODO: parse json locally
-        JsonReader debug_reader = JsonReader(".");
-        std::pair<std::string, nlohmann::json> debug_result = debug_reader.getJson(options.wordlist[0]);
-        std::cout << RED << debug_result.first << " : " << RESET << debug_result.second["url"] << std::endl;
+    // TODO: parse json locally
+    JsonReader debug_reader = JsonReader(".");
+    std::pair<std::string, nlohmann::json> debug_result = debug_reader.getJson(options.wordlist[0]);
+    std::cout << RED << debug_result.first << " : " << RESET << debug_result.second["url"] << std::endl;
 
 #endif
 #if(RELEASE)
-        JsonReader reader = JsonReader(options.baseDirectory);
+    JsonReader reader = JsonReader(options.baseDirectory);
+    std::pair<std::string, nlohmann::json> result = reader.getJson(options.wordlist[0]);
 #endif
-        if (options.decompress) {
-            std::cout << GREEN << BOLD << "DECOMPRESS ENABLED" << RESET << std::endl;
-        }
+    if (options.decompress) {
+        std::cout << GREEN << BOLD << "DECOMPRESS ENABLED" << RESET << std::endl;
     }
+#if(DEBUG)
+    std::tuple<std::string, std::string, bool> url = HttpClient::split_url(debug_result.second["url"]);
+    std::cout << GREEN << BOLD << "FILE: " << debug_result.first << "\nHOST: " << get<0>(url) << "\nFILE: " << get<
+        1>(url) << std::endl;
+#endif
 
     std::cout << RED << UNDERLINE << "NOT YET IMPLEMENTED" << RESET << std::endl;
     std::exit(0);
